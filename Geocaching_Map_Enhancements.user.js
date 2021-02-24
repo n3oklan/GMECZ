@@ -21,21 +21,21 @@
   // @connect     www.geocaching.com
   // @icon        https://gmecz.geosever.cz/gs_ikona.png
   // @icon64      https://gmecz.geosever.cz/gs_ikona.png
-  // @updateURL   https://gmecz.geosever.cz/gmecz/GeocachingMapEnhancements.meta.js
-  // @downloadURL https://gmecz.geosever.cz/gmecz/Geocaching_Map_Enhancements.user.js
+  // @updateURL   https://github.com/n3oklan/GMECZ/raw/main/GeocachingMapEnhancements.meta.js
+  // @downloadURL https://github.com/n3oklan/GMECZ/raw/main/Geocaching_Map_Enhancements.user.js
   // ==/UserScript==
-  
+
   /* jshint multistr: true */
   /* global $, amplify, DMM, FileReader, GM, GM_xmlhttpRequest, Groundspeak, L, LatLon, mapLatLng, MapSettings */
-  
+
   (function () {
   "use strict";
-  
+
   var gmeResources = {
   	parameters: {
   		// Defaults
   		version: "0.3.0",
-  		versionMsg: "Přesun na github, kosmetické úpravy",
+  		versionMsg: "Kosmetické úpravy",
   		brightness: 1,	// Default brightness for maps (0-1), can be overridden by custom map parameters.
   		filterFinds: false, // True filters finds out of list searches.
   		follow: false,	// Locator widget follows current location (moving map mode)
@@ -47,16 +47,18 @@
   	//	{alt:"Readable Name", tileUrl: "URL template including {s} (subdomain) and either {q} (quadkey) or {x},{y},{z} (Google/TMS tile coordinates + zoom)", subdomains: "0123", minZoom: 0, maxZoom: 24, attribution: "Copyright message (HTML allowed)", name: "shortname", overlay:false }
   			{alt:"Mapy.cz - Základní",tileUrl:"//mapserver.mapy.cz/base-m/{z}-{x}-{y}",minZoom:5,maxZoom:18,attribution:"<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /><a href='https://licence.mapy.cz/?doc=mapy_pu'><img src='https://api.mapy.cz/img/api/logo.svg' height='16px' /></a>"},
   			{alt:"Mapy.cz - Turistická",tileUrl:"//mapserver.mapy.cz/turist-m/{z}-{x}-{y}",minZoom:5,maxZoom:18,attribution:"<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /><a href='https://licence.mapy.cz/?doc=mapy_pu'><img src='https://api.mapy.cz/img/api/logo.svg' height='16px' /></a>"},
-  			{alt:"Mapy.cz - Dopravní",tileUrl:"//mapserver.mapy.cz/base-m/{z}-{x}-{y}?s=0.2&dm=Luminosity",minZoom:5,maxZoom:18,attribution:"<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /><a href='https://licence.mapy.cz/?doc=mapy_pu'><img src='https://api.mapy.cz/img/api/logo.svg' height='16px' /></a>"},
-  			{alt:"Mapy.cz - Zeměpisná",tileUrl:"//mapserver.mapy.cz/zemepis-m/{z}-{x}-{y}",minZoom:5,maxZoom:18,attribution:"<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /><a href='https://licence.mapy.cz/?doc=mapy_pu'><img src='https://api.mapy.cz/img/api/logo.svg' height='16px' /></a>"},
+  			{alt:"Mapy.cz - Dopravní",tileUrl:"//mapserver.mapy.cz/base-m/{z}-{x}-{y}?s=0.2&dm=Luminosity",minZoom:5,maxZoom:18,attribution:"<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /><a href='https://licence.mapy.cz/?doc=mapy_pu'><img src='https://api.mapy.cz/img/api/logo.svg' height='16px' /></a>"}, 			
+        {alt:"Mapy.cz - Zeměpisná",tileUrl:"//mapserver.mapy.cz/zemepis-m/{z}-{x}-{y}",minZoom:5,maxZoom:18,attribution:"<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /><a href='https://licence.mapy.cz/?doc=mapy_pu'><img src='https://api.mapy.cz/img/api/logo.svg' height='16px' /></a>"},
   			{alt:"Mapy.cz - Letecká",tileUrl:"//mapserver.mapy.cz/bing/{z}-{x}-{y}",minZoom:5,maxZoom:20,attribution:"<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /><a href='https://licence.mapy.cz/?doc=mapy_pu'><img src='https://api.mapy.cz/img/api/logo.svg' height='16px' /></a>"},
-  			{alt:"OpenStreetMap",tileUrl:"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",attribution:"<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /> OpenStreetMap",subdomains:"abc",ignore:false},
+        {alt:"Mapy.cz - ČB",tileUrl:"//mapserver.mapy.cz/base-m/{z}-{x}-{y}?s=0.01&dm=Luminosity",minZoom:5,maxZoom:18,attribution:"<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /><a href='https://licence.mapy.cz/?doc=mapy_pu'><img src='https://api.mapy.cz/img/api/logo.svg' height='16px' /></a>"},
+        {alt:"OpenStreetMap",tileUrl:"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",attribution:"<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /> OpenStreetMap",subdomains:"abc",ignore:false},
   			{alt:"OpenTopoMap",tileUrl:"https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",attribution:"<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /> Kartendaten: © <a href='https://openstreetmap.org/copyright'>OpenStreetMap</a>-Mitwirkende, SRTM | Kartendarstellung: © <a href='http://opentopomap.org'>OpenTopoMap</a> (<a href='https://creativecommons.org/licenses/by-sa/3.0/'>CC-BY-SA</a>)",subdomains:"abc",ignore:false},
   			{alt:"MTB mapa",tileUrl:"http://tile.mtbmap.cz/mtbmap_tiles/{z}/{x}/{y}.png",minZoom:6,maxZoom:18,attribution:"<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /> Martin Tesař, OpenStreetMap a USGS"},
   			{alt:"ČUZK - 1:25000","tileUrl":"http://geoportal.cuzk.cz/WMS_ZM25_PUB/WMService.aspx","crs":"EPSG:4326","layers":"GR_ZM25","format":"image/png","transparent":false,"attribution":"<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /> Český úřad zeměměřický a katastrální","overlay":false,"ignore":false,"minZoom":11,"maxZoom":15},
   			{alt:"ČUZK - Satelitní",tileUrl:"http://geoportal.cuzk.cz/WMS_ORTOFOTO_PUB/WMService.aspx",crs:"EPSG:4326",layers:"GR_ORTFOTORGB",format:"image/png",transparent:false,attribution:"<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /> Český úřad zeměměřický a katastrální",overlay:false,ignore:false,minZoom:10,maxZoom:20},
   			{alt:"Stínování terénu", tileUrl:"http://{s}.tiles.wmflabs.org/hillshading/{z}/{x}/{y}.png", subdomains: "abc", attribution:"Hillshading by <a href=\'https://wiki.openstreetmap.org/wiki/Hike_%26_Bike_Map\'>Colin Marquardt</a> from NASA SRTM data", overlay: true},
-
+        {alt:"trasy - turistické ","tileUrl":"http://tile.waymarkedtrails.org/hiking/{z}/{x}/{y}.png ","name":"wmt","overlay":true,"ignore":false},
+        {alt:"trasy - cyklo ","tileUrl":"https://tile.waymarkedtrails.org/cycling/{z}/{x}/{y}.png ","name":"wmt","overlay":true,"ignore":false},
   		]
   	},
   	css: {
@@ -83,7 +85,7 @@
   			.GME_GS {background: url(https://gmecz.geosever.cz/gs_ikona_20.png) no-repeat center center #eee;}\
   			.GME_hide {background: url(https://gmecz.geosever.cz/closed_eye.png) no-repeat center center #eee;}\
   			.GME_hide.gme-button-active {background: url(https://gmecz.geosever.cz/open_eye.png) no-repeat center center #eee;}\
-        		.GME_route {background: url(https://gmecz.geosever.cz/gps-connected.png) no-repeat center center #eee;}\
+        	.GME_route {background: url(https://gmecz.geosever.cz/gps-connected.png) no-repeat center center #eee;}\
   			.GME_route.gme-button-active {background: url(https://gmecz.geosever.cz/gps-disconnected.png) no-repeat center center #eee;}\
   			.GME_info {background: url(https://gmecz.geosever.cz/pin.png) no-repeat center center #eee;}\
   			.GME_info.gme-button-active {background: url(https://gmecz.geosever.cz/unpin.png) no-repeat center center #eee;}\
@@ -125,8 +127,7 @@
   			.gme-fieldgroup ul { margin: 0.5em 0; padding: 0; }\
   			.gme-fieldgroup li { display: inline-block; margin: 0 -1px -1px 0; background: #ddd; border: 1px solid #ccc; border-radius: 6px; padding: 0 0.5em; }\
   			.gme-xhair { cursor: crosshair; }\
-  			.map-button-container { margin-right: 5em; }',
-  		drag: '#cacheDetails .cacheImage { border: solid 1px #ccc; border-radius: 7px; padding-left: 5px; }\
+  			.map-button-container { margin-right: 5em; }', drag: '#cacheDetails .cacheImage { border: solid 1px #ccc; border-radius: 7px; padding-left: 5px; }\
   			.moveable { cursor: move; box-shadow: 0 1px 4px rgba(102, 51, 255, 0.3); }'
   	},
   	env: {
@@ -274,7 +275,7 @@
   					}
   					break;
   				}
-  
+
   				if (load_count < maxTries) {
   					window.setTimeout(setEnv, wait);
   					load_count++;
@@ -308,7 +309,7 @@
   						bounds_NI = new L.LatLngBounds(new L.LatLng(54,-8.25),new L.LatLng(55.73,-5.25));
   						bounds_CI = new L.LatLngBounds(new L.LatLng(49.1,-2.8),new L.LatLng(49.8,-1.8));
   						bounds_DE = new L.LatLngBounds(new L.LatLng(47.24941,5.95459),new L.LatLng(55.14121,14.89746));
-  						L.GME_DistLine = L.Polyline.extend(polylineObj); 
+  						L.GME_DistLine = L.Polyline.extend(polylineObj);
   						L.GME_QuadkeyLayer = L.TileLayer.extend(quadkeyLayerObj);
   						L.GME_complexLayer = L.TileLayer.extend(complexLayerObj);
   						L.GME_genericLayer = genericLayerFn;
@@ -329,7 +330,7 @@
   					}
   				},
   				j;
-  				
+
   				for (j = 0; j < scriptArray.length; j++) {
   					if (initScripts.hasOwnProperty(scriptArray[j]) && typeof initScripts[scriptArray[j]] === "function") {
   						initScripts[scriptArray[j]]();
@@ -460,7 +461,7 @@
   			function validURL(url) {
   				return (/^(http|https|ftp)\:\/\/([a-zA-Z0-9\.\-]+(\:[a-zA-Z0-9\.&amp;%\$\-]+)*@)*((25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])|localhost|([a-zA-Z0-9\-]+\.)*[a-zA-Z0-9\-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(\:[0-9]+)*(\/($|[a-zA-Z0-9\.\,\?'\\\+&amp;%\$#\=~_\-]+))*$/).test(url);
   			}
-  
+
   			if (window.console === undefined) {
                   var logFn = function (text) {};
   				window.console = {
@@ -470,7 +471,7 @@
                       warn: logFn
                   };
   			}
-  			
+
   			if (gmeConfig.env.xhr) {
   				JSONP = function (url, id) {
   					console.log("GMECZ: Používám GM_xhr k odchycení " + url);
@@ -511,9 +512,9 @@
   					}
   				};
   			}
-  
+
   			gmeConfig.env.home = getHomeCoords();
-  			
+
   			this.parameters = gmeConfig.parameters;
   			this.getVersion = function() { return gmeConfig.parameters.version; };
   			this.getGeograph = function(coords) {
@@ -1552,7 +1553,7 @@
   						}, this.options));
   					}
   				};
-  				
+
   			function GME_displayPoints(plist, map, context) {
   				var bounds = new L.LatLngBounds(), i, p, layers = L.featureGroup(), ll, op, PinIcon = L.Icon.extend({iconSize: new L.Point(20, 23),iconAnchor: new L.Point(10,23)});
   				function checkType(t) {
@@ -1630,7 +1631,7 @@
                       return filtered;
                   }
                   var filteredOpts = filterOpts(options);
-                  
+
   				if (typeof url === "string") {
   					return (/\{q\}/).test(url)?(new L.GME_QuadkeyLayer(url, filteredOpts)):((/\{s4\}|\{x100\}/).test(url)?(new L.GME_complexLayer(url,filteredOpts)):((/\{x\}/).test(url)?(new L.TileLayer(url, filteredOpts)):(new L.TileLayer.WMS(url, filteredOpts))));
   				}
@@ -1705,12 +1706,12 @@
   			function GME_load_map(map){
   				var control = GME_get_layerControl(),
   					layer;
-  
+
   				map.on("layeradd", switchLayer);
   				if (document.createElement("div").style.opacity!==undefined) {
   					map.on("layeradd", setBrightness);
   				}
-  
+
   				/* If we're adding our own map selector control, we need to manually remove any pre-existing map layers.  Otherwise, they persist in the background underneath
   				 * the layers provided by GME.	We check for the _url or _google attribute to distinguish map layers from other Leaflet layers like controls or popups */
   				if (control) {
@@ -2124,7 +2125,7 @@
                         }
 					}
 					popupContent += "</p>";
-						
+
 					popup.setLatLng(e.latlng);
 					popup.setContent(popupContent);
 					control._map.addLayer(popup);
@@ -2239,10 +2240,10 @@
 					if (window.MapSettings && MapSettings.MapLayers && MapSettings.MapLayers.AddGeocacheLayer && MapSettings.MapLayers.RemoveGeocacheLayer) {
 						if (MapSettings.MapLayers.Geocache) {
 							MapSettings.MapLayers.RemoveGeocacheLayer();
-							$(".GME_hide").addClass("gme-button-active").attr("title","Show caches");
+							$(".GME_hide").addClass("gme-button-active").attr("title","Zobrazit cache");
 						} else {
 							MapSettings.MapLayers.AddGeocacheLayer();
-							$(".GME_hide").removeClass("gme-button-active").attr("title","Hide caches");
+							$(".GME_hide").removeClass("gme-button-active").attr("title","Skrýt cache");
 						}
 					}
 				},
@@ -2252,12 +2253,12 @@
 							on: function() {
 								that._map.on("click contextmenu",that.showInfo,that);
 								$("#map_canvas").addClass("gme-xhair");
-								$(".GME_info").addClass("gme-button-active").attr("title","Disable location info tool");
+								$(".GME_info").addClass("gme-button-active").attr("title","Zavřít informace o lokaci");
 							},
 							off: function() {
 								that._map.off("click contextmenu",that.showInfo,that);
 								$("#map_canvas").removeClass("gme-xhair");
-								$(".GME_info").removeClass("gme-button-active").attr("title","Enable location info tool");
+								$(".GME_info").removeClass("gme-button-active").attr("title","Povolit informace o lokaci");
 							}
 						},
 						none: {on: function() {}, off: function() {}},
@@ -2265,12 +2266,12 @@
 							on: function() {
 								that._map.on("click contextmenu",that.showRoute,that);
 								$("#map_canvas").addClass("gme-xhair");
-								$(".GME_route").addClass("gme-button-active").attr("title","Disable route tool");
+								$(".GME_route").addClass("gme-button-active").attr("title","Zavřít routovací nástroj");
 							},
 							off: function() {
 								that._map.off("click contextmenu",that.showRoute,that);
 								$("#map_canvas").removeClass("gme-xhair");
-								$(".GME_route").removeClass("gme-button-active").attr("title","Enable route tool");
+								$(".GME_route").removeClass("gme-button-active").attr("title","Povolit routovací nástroj");
 							}
 						}
 					};
@@ -2397,7 +2398,7 @@
 						console.warn("updateScale didn't have working map");
 						return;
 					}
-					
+
 					function updateMap() {
 						var bound = map.getBounds();
 						var width = formatDistance(Math.cos(map.getCenter().lat * L.LatLng.DEG_TO_RAD) * 111319.49079327358 * Math.abs(bound.getSouthWest().lng - bound.getSouthEast().lng));
@@ -2439,10 +2440,10 @@
 					return c;
 				}
 			};
-			
+
 			function GME_load_widget(map) {
 				var control = new L.GME_Widget().addTo(map);
-         
+
 				$(control._container).addClass("gme-left").css("top", "20px");
 				$(".groundspeak-control-findmylocation").remove();
 				if (L.GME_FollowMyLocationControl) {
@@ -2628,7 +2629,7 @@ if(document.querySelector("head[data-gme-version]")) {
 	console.error("Aborting: GME already running on page: " + document.location);
 	return;
 }
-document.documentElement.firstChild.setAttribute("data-gme-version", gmeResources.parameters.version); 
+document.documentElement.firstChild.setAttribute("data-gme-version", gmeResources.parameters.version);
 
 for (i = 0; i < pageTests.length; i++) {
 	if (pageTests[i][1].test(document.location.pathname)) {
@@ -2677,7 +2678,7 @@ if(gmeResources.env.storage) {
 			} catch (e) {
 				console.warn("GME: Could not parse stored configuration parameters.");
 			}
-		} 
+		}
 		/* Import old-style custom maps */
 		customJSON = localStorage.getItem("GME_custom");
 		if (customJSON) {
@@ -2690,7 +2691,7 @@ if(gmeResources.env.storage) {
 				delete localStorage.GME_custom;
 			} catch (e) {
 				console.warn("GMECZ: Could not parse stored custom maps.");
-			} 
+			}
 		}
 		/* Remove old-style builtin maps */
 		if (gmeResources.parameters.includeMaps) {
@@ -2734,7 +2735,7 @@ if (!gmeResources.env.dragdrop) {
 	gmeResources.script.drop = gmeResources.script.drag;
 }
 
-insertCSS(gmeResources.css.main); 
+insertCSS(gmeResources.css.main);
 if(gmeResources.env.storage) {
 	insertPage('GME_config', gmeResources.html.config, 'Nastavení GMECZ v' + gmeResources.parameters.version);
 	insertPage('GME_format', gmeResources.html.customInfo, 'Vlastní zdroje map', 'GME_config');
@@ -2766,7 +2767,7 @@ switch(gmeResources.env.page) {
 				break;
 			}
 		}
-		
+
 		if (target && target2) {
 			var grDiv = document.createElement("div"), hereDiv = document.createElement("div");
 			grDiv.innerHTML = '<h5>Ordnance Survey Grid Reference :</h5><dl><dt>Grid reference : </dt><dd><form name="grForm" id="grForm"><input type="text" class="Text EqualWidthInput" maxlength="50" size="15" name="grRef" id="grRef" placeholder="SU122422">&nbsp;<input type="submit" class="Button blockWithModalSpinner" name="submitGR" value="Go" id="grSub"></form></dd></dl><h5>Freeform coordinates</h5><dl><dt>Coordinates :</dt><dd><form name="coordForm" id="coordForm"><input type="text" class="Text EqualWidthInput" maxlength="50" size="15" name="gme_coords" id="gme_coords" placeholder="N 51° 10.683′ W 001° 49.604′"/>&nbsp;<input type="submit" class="Button blockWithModalSpinner" name="gme_coords_sub" value="Go" id="gme_coords_sub"/></form></dd></dl>';
