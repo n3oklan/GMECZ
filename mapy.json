@@ -1,0 +1,169 @@
+[
+    {
+        "alt": "Mapy.cz - Základní",
+        "tileUrl": "//mapserver.mapy.cz/base-m/{z}-{x}-{y}",
+        "minZoom": 5,
+        "maxZoom": 18,
+        "attribution": "<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /><a href='https://licence.mapy.cz/?doc=mapy_pu'><img src='https://api.mapy.cz/img/api/logo.svg' height='16px' /></a>",
+        "ignore": false
+    },
+    {
+        "alt": "Mapy.cz - Turistická",
+        "tileUrl": "//mapserver.mapy.cz/turist-m/{z}-{x}-{y}",
+        "minZoom": 5,
+        "maxZoom": 18,
+        "attribution": "<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /><a href='https://licence.mapy.cz/?doc=mapy_pu'><img src='https://api.mapy.cz/img/api/logo.svg' height='16px' /></a>",
+        "ignore": false
+    },
+    {
+        "alt": "Mapy.cz - Dopravní",
+        "tileUrl": "//mapserver.mapy.cz/base-m/{z}-{x}-{y}?s=0.2&dm=Luminosity",
+        "minZoom": 5,
+        "maxZoom": 18,
+        "attribution": "<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /><a href='https://licence.mapy.cz/?doc=mapy_pu'><img src='https://api.mapy.cz/img/api/logo.svg' height='16px' /></a>",
+        "ignore": false
+    },
+    {
+        "alt": "Mapy.cz - Zeměpisná",
+        "tileUrl": "//mapserver.mapy.cz/zemepis-m/{z}-{x}-{y}",
+        "minZoom": 5,
+        "maxZoom": 18,
+        "attribution": "<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /><a href='https://licence.mapy.cz/?doc=mapy_pu'><img src='https://api.mapy.cz/img/api/logo.svg' height='16px' /></a>",
+        "ignore": false
+    },
+    {
+        "alt": "Mapy.cz - Letecká",
+        "tileUrl": "//mapserver.mapy.cz/bing/{z}-{x}-{y}",
+        "minZoom": 5,
+        "maxZoom": 20,
+        "attribution": "<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /><a href='https://licence.mapy.cz/?doc=mapy_pu'><img src='https://api.mapy.cz/img/api/logo.svg' height='16px' /></a>",
+        "ignore": false
+    },
+    {
+        "alt": "Mapy.cz - ČB",
+        "tileUrl": "//mapserver.mapy.cz/base-m/{z}-{x}-{y}?s=0.01&dm=Luminosity",
+        "minZoom": 5,
+        "maxZoom": 18,
+        "attribution": "<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /><a href='https://licence.mapy.cz/?doc=mapy_pu'><img src='https://api.mapy.cz/img/api/logo.svg' height='16px' /></a>",
+        "ignore": false
+    },
+    {
+        "alt": "OpenStreetMap",
+        "tileUrl": "//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        "attribution": "<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /> OpenStreetMap",
+        "subdomains": "abc",
+        "ignore": false
+    },
+    {
+        "alt": "OpenTopoMap",
+        "tileUrl": "//{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
+        "attribution": "<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /> Kartendaten: © <a href='https://openstreetmap.org/copyright'>OpenStreetMap</a>-Mitwirkende, SRTM | Kartendarstellung: © <a href='http://opentopomap.org'>OpenTopoMap</a> (<a href='https://creativecommons.org/licenses/by-sa/3.0/'>CC-BY-SA</a>)",
+        "subdomains": "abc",
+        "ignore": false
+    },
+    {
+        "alt": "MTB mapa",
+        "tileUrl": "//tile.mtbmap.cz/mtbmap_tiles/{z}/{x}/{y}.png",
+        "minZoom": 6,
+        "maxZoom": 18,
+        "attribution": "<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /> Martin Tesař, OpenStreetMap a USGS",
+        "ignore": false
+    },
+    {
+        "alt": "ČUZK - 1:25000",
+        "tileUrl": "//geoportal.cuzk.cz/WMS_ZM25_PUB/WMService.aspx",
+        "crs": "EPSG:4326",
+        "layers": "GR_ZM25",
+        "format": "image/png",
+        "transparent": false,
+        "attribution": "<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /> Český úřad zeměměřický a katastrální",
+        "overlay": false,
+        "ignore": false,
+        "minZoom": 11,
+        "maxZoom": 15
+    },
+    {
+        "alt": "ČUZK - Satelitní",
+        "tileUrl": "//geoportal.cuzk.cz/WMS_ORTOFOTO_PUB/WMService.aspx",
+        "crs": "EPSG:4326",
+        "layers": "GR_ORTFOTORGB",
+        "format": "image/png",
+        "transparent": false,
+        "attribution": "<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /> Český úřad zeměměřický a katastrální",
+        "overlay": false,
+        "ignore": false,
+        "minZoom": 10,
+        "maxZoom": 20
+    },
+    {
+        "alt": "trasy - turistické ",
+        "tileUrl": "//tile.waymarkedtrails.org/hiking/{z}/{x}/{y}.png ",
+        "name": "wmt",
+        "overlay": true,
+        "ignore": false
+    },
+    {
+        "alt": "trasy - cyklo ",
+        "tileUrl": "//tile.waymarkedtrails.org/cycling/{z}/{x}/{y}.png ",
+        "name": "wmt",
+        "overlay": true,
+        "ignore": false
+    },
+    {
+        "alt": "mapy IDNES",
+        "tileUrl": "//webtiles.timepress.cz/open/idnes_256/{z}/{x}/{y}",
+        "minZoom": 3,
+        "maxZoom": 16,
+        "attribution": "freytag & berndt, SHOCart",
+        "ignore": false
+    },
+    {
+        "alt": "Mapy.cz - Popisky",
+        "tileUrl": "//mapserver.mapy.cz/hybrid-sparse-m/{z}-{x}-{y}",
+        "minZoom": 5,
+        "maxZoom": 20,
+        "attribution": "© Seznam.cz, a.s.",
+        "overlay": true,
+        "ignore": false
+    },
+    {
+        "alt": "Mapy.cz - Popisky a cesty",
+        "tileUrl": "//mapserver.mapy.cz/hybrid-base-m/{z}-{x}-{y}",
+        "minZoom": 5,
+        "maxZoom": 20,
+        "attribution": "© Seznam.cz, a.s.",
+        "overlay": true,
+        "ignore": false
+    },
+    {
+        "alt": "Mapy.cz - Popisky a trasy",
+        "tileUrl": "//mapserver.mapy.cz/hybrid-turist-m/{z}-{x}-{y}",
+        "minZoom": 5,
+        "maxZoom": 20,
+        "attribution": "© Seznam.cz, a.s.",
+        "overlay": true,
+        "ignore": false
+    },
+    {
+        "alt": "ČUZK - Stínování",
+        "tileUrl": "http://ags.cuzk.cz/arcgis2/services/dmr5g/ImageServer/WMSServer",
+        "crs": "EPSG:4326",
+        "layers": "dmr5g:GrayscaleHillshade",
+        "format": "image/png",
+        "transparent": false,
+        "attribution": "© Český úřad zeměměřický a katastrální",
+        "opacity": "0.2",
+        "overlay": true,
+        "ignore": false,
+        "minZoom": 10,
+        "maxZoom": 20
+    },
+    {
+        "alt": "terrain stamen",
+        "tileUrl": "//stamen-tiles-b.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png",
+        "minZoom": 6,
+        "maxZoom": 17,
+        "attribution": "OpenStreetMap NPE",
+        "ignore": false
+    }
+]
