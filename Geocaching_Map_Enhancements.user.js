@@ -1,6 +1,6 @@
   // ==UserScript==
   // @name        GMECZ
-  // @version     0.3.1
+  // @version     0.4.0
   // @author      n3oklan
   // @oujs:author n3oklan
   // @namespace   https://gmecz.geosever.cz
@@ -19,8 +19,8 @@
   // @connect     api.geonames.org
   // @connect     api.postcodes.io
   // @connect     www.geocaching.com
-  // @icon        https://gmecz.geosever.cz/icons/gs_ikona.png
-  // @icon64      https://gmecz.geosever.cz/icons/gs_ikona.png
+  // @icon        https://gmecz.geosever.cz/gs_ikona.png
+  // @icon64      https://gmecz.geosever.cz/gs_ikona.png
   // @updateURL   https://raw.githubusercontent.com/n3oklan/GMECZ/main/GeocachingMapEnhancements.meta.js
   // @downloadURL https://raw.githubusercontent.com/n3oklan/GMECZ/main/Geocaching_Map_Enhancements.user.js
   // ==/UserScript==
@@ -233,15 +233,15 @@
   			.gme-button-active {border:solid 3px #02b; padding:1px 0 1px 1px; background-color:#fff;}\
   			.gme-button-active:hover {border-color:#63f;filter:alpha(opacity=100);}\
   			span.gme-button, .gme-button-wide { padding-left:5px; padding-right:5px; font-size:12px; font-weight:bold; width:auto; background-image:none; color: #424242; }\
-  			.GME_home {background: url(https://gmecz.geosever.cz/icons/home.png) no-repeat center center #eee;}\
-  			.GME_config {background: url(https://gmecz.geosever.cz/icons/gear.png) no-repeat center center #eee;}\
-  			.GME_GS {background: url(https://gmecz.geosever.cz/icons/gs_ikona_20.png) no-repeat center center #eee;}\
-  			.GME_hide {background: url(https://gmecz.geosever.cz/icons/closed_eye.png) no-repeat center center #eee;}\
-  			.GME_hide.gme-button-active {background: url(https://gmecz.geosever.cz/icons/open_eye.png) no-repeat center center #eee;}\
-        	.GME_route {background: url(https://gmecz.geosever.cz/icons/gps-connected.png) no-repeat center center #eee;}\
-  			.GME_route.gme-button-active {background: url(https://gmecz.geosever.cz/icons/gps-disconnected.png) no-repeat center center #eee;}\
-  			.GME_info {background: url(https://gmecz.geosever.cz/icons/pin.png) no-repeat center center #eee;}\
-  			.GME_info.gme-button-active {background: url(https://gmecz.geosever.cz/icons/unpin.png) no-repeat center center #eee;}\
+  			.GME_home {background: url(https://gmecz.geosever.cz/home.png) no-repeat center center #eee;}\
+  			.GME_config {background: url(https://gmecz.geosever.cz/gear.png) no-repeat center center #eee;}\
+  			.GME_GS {background: url(https://gmecz.geosever.cz/gs_ikona_20.png) no-repeat center center #eee;}\
+  			.GME_hide {background: url(https://gmecz.geosever.cz/closed_eye.png) no-repeat center center #eee;}\
+  			.GME_hide.gme-button-active {background: url(https://gmecz.geosever.cz/open_eye.png) no-repeat center center #eee;}\
+        	.GME_route {background: url(https://gmecz.geosever.cz/gps-connected.png) no-repeat center center #eee;}\
+  			.GME_route.gme-button-active {background: url(https://gmecz.geosever.cz/gps-disconnected.png) no-repeat center center #eee;}\
+  			.GME_info {background: url(https://gmecz.geosever.cz/pin.png) no-repeat center center #eee;}\
+  			.GME_info.gme-button-active {background: url(https://gmecz.geosever.cz/unpin.png) no-repeat center center #eee;}\
   			.gme-button-refresh-labels { background-position: -320px 4px;}\
   			.gme-button-clear-labels { background-position: -69px 4px;}\
   			.gme-scale-container {border: 1px solid #012345;}\
@@ -478,7 +478,7 @@
   						}
   						if ($.fancybox === undefined) {
   							console.info("GMECZ: lovím Fancybox");
-  							$("head").append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css' /><script src='https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js'></script>");
+  							$("head").append("<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css' /><script src='https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js'></script>");
   						}
   					}
   				},
@@ -792,7 +792,7 @@
   						that.parameters.maps = m;
   						return 1;
   					}
-  					alert("MZdroj mapy musí obsahovat alespoň parametry \"alt\" a \"tileUrl\".");
+  					alert("Zdroj mapy musí obsahovat alespoň parametry \"alt\" a \"tileUrl\".");
   					return 0;
   				}
   				var i,updated=0;
@@ -1112,7 +1112,7 @@
   					function readGPX(e) {
   						var data = e.target.result, pts = parseGPX(data);
   						if (pts) {
-  							console.info("GMECZ: Received GPX file");
+  							console.info("GMECZ: Přijatý soubor GPX");
   							GME_displayPoints(pts,map,"dragdrop");
   						}
   					}
@@ -1122,7 +1122,7 @@
   					try {
   						data = dt.getData("application/gme-cache-coords");
   						if (data) {
-  							console.info("GMECZ: Received GME data");
+  							console.info("GMECZ: Přijaté údaje GME");
   							GME_displayPoints(JSON.parse(data),map,"dragdrop");
   							return;
   						}
@@ -1130,13 +1130,13 @@
   						if (data) {
   							pts = parseLOC(data);
   							if (pts) {
-  								console.info("GMECZ: Received LOC text");
+  								console.info("GMECZ: Přijatý text LOC");
   								GME_displayPoints(pts,map,"dragdrop");
   								return;
   							}
   							pts = parseGPX(data);
   							if (pts) {
-  								console.info("GMECZ: Received GPX text");
+  								console.info("GMECZ: Přijatý text GPX");
   								GME_displayPoints(pts,map,"dragdrop");
   								return;
   							}
@@ -1154,7 +1154,7 @@
   								reader.onload = readGPX;
   								reader.readAsText(file);
   							} else {
-  								console.warn("GME: Dropped file not recognised: " + file.name + ", (type: " + file.type + ")");
+  								console.warn("GME: Vložený soubor nebyl rozpoznán: " + file.name + ", (type: " + file.type + ")");
   							}
   						}
   					}
@@ -1168,7 +1168,7 @@
   						if (array.contains) {
   							return array.contains(value);
   						}
-  						console.warn("GME: couldn\'t determine type of dragged data. Accepting anyway.");
+  						console.warn("GME: nelze určit typ přetažených dat. Přesto přijímám.");
   						return true;
   					}
   					if (dt && dt.types) {
@@ -1234,8 +1234,8 @@
   						map.off("viewreset", this._reset, this);
   					},
   					options: {
-  						label: "Cache",
-  						desc: "Long cache name"
+  						label: "Keš",
+  						desc: "Dlouhý název keše"
   					},
   					setPosition: function (ll) {
   						this._latlng = ll;
@@ -1365,16 +1365,16 @@
   						$("#gme_cachelist").html(html);
   					}
   				};
-  				$("#searchtabs ul").append("<li id='gme_caches_button'><a href='#gme_caches' title='GME Cache Label List' id='gme_caches_link'>GME</a></li>");
+  				$("#searchtabs ul").append("<li id='gme_caches_button'><a href='#gme_caches' title='Seznam štítků keší GMECZ' id='gme_caches_link'>GMECZ</a></li>");
   				$("#searchtabs li").css("width", 100/$("#searchtabs li").length+"%");
   				$("#pqlink").html("PQs");
   				$("#clistButton").html("GCVote");
   				document.getElementById("pqlink").innerHTML = "PQs";
   				$(div).append("<div id='gme_caches'>\
   					<div class='leaflet-control-gme'>\
-  						<a title='Refresh cache labels' class='gme-event gme-button-refresh-labels gme-button gme-button-l' data-gme-action='refresh'></a><a title='Empty cache list and remove labels from map' class='gme-event gme-button gme-button-clear-labels' data-gme-action='clear'></a><a class='gme-event gme-button gme-button-wide gme-button-labels-show' data-gme-action='show'>Show labels</a><a class='gme-event gme-button gme-button-r gme-button-wide gme-button-labels-auto' data-gme-action='auto'>Auto update</a>\
+  						<a title='Obnovení štítků keší' class='gme-event gme-button-refresh-labels gme-button gme-button-l' data-gme-action='refresh'></a><a title='Vyprázdnění seznamu keší a odstranění štítků z mapy' class='gme-event gme-button gme-button-clear-labels' data-gme-action='clear'></a><a class='gme-event gme-button gme-button-wide gme-button-labels-show' data-gme-action='show'>Zobrazit štítky</a><a class='gme-event gme-button gme-button-r gme-button-wide gme-button-labels-auto' data-gme-action='auto'>Automatická aktualizace</a>\
   					</div>\
-  					<table><tbody id='gme_cachelist'><tr><td colspan='3'>Hit the refresh button above to populate the list.</td></tr></tbody></table></div>");
+  					<table><tbody id='gme_cachelist'><tr><td colspan='3'>Stisknutím výše uvedeného tlačítka obnovit se seznam doplní.</td></tr></tbody></table></div>");
   				$("#gme_caches").css("display","none").on("click", ".gme-event", labelHandler);
   				$("#gme-labels-show").on("change", control.labels.toggleShow);
   				$("#gme-labels-auto").on("change", control.labels.toggleAuto);
@@ -1418,10 +1418,10 @@
   							}
   							parking = cmapAdditionalWaypoints[i];
   							if (parking.type === 217 || parking.type === 221) {
-  								label = parking.type===217?"Parking Area":"Trailhead";
+  								label = parking.type===217?"Parkoviště":"Rozcestník";
   								parkUrl = `https://www.google.com/maps/dir/${gmeConfig.env.home.toUrl()}/${parking.lat},${parking.lng}/`;
   								$("#awpt_"+parking.pf)[0].parentNode.parentNode.children[1].innerHTML +=
-  									`<a target="_blank" rel="noopener noreferrer" href="${parkUrl}"><img width="16" height="16" title="[GME] Directions to ${label}" alt="${label}" src="https://www.geocaching.com/images/icons/16/directions.png" /></a>`;
+  									`<a target="_blank" rel="noopener noreferrer" href="${parkUrl}"><img width="16" height="16" title="[GMECZ] Pokyny k ${label}" alt="${label}" src="https://www.geocaching.com/images/icons/16/directions.png" /></a>`;
   							}
   						}
   					}
@@ -1457,7 +1457,7 @@
   				if (gmeConfig.parameters.osgbSearch) {
   					$("#SearchBox_OS").on("click keypress", goSearch);
   					$(".SearchBox").on("keydown", goSearch);
-  					$("#search p")[0].innerHTML = "Search by <span style='cursor:help;' title='Enhanced by Geonames'>Address</span>, Coordinates, GC-code,<br/><span style='cursor:help;' title='Jump to a specific zoom level by typing zoom then a number. Zoom 1 shows the whole world, maxiumum zoom is normally 18-22.'>zoom</span> or <span style='cursor:help;' title='To search using a British National Grid reference, just type it in the search box and hit the button! You can use 2, 4, 6, 8 or 10-digit grid refs with the 2-letter prefix but no spaces in the number (e.g. SU12344225) or absolute grid refs with a comma but no prefix (e.g. 439668,1175316).'>Grid Ref</span>";
+  					$("#search p")[0].innerHTML = "Vyhledávání podle <span style='cursor:help;' title='Rozšířeno o Geonames'>adresy</span>, souřadice, GC-kódy,<br/><span style='cursor:help;' title='Jump to a specific zoom level by typing zoom then a number. Zoom 1 shows the whole world, maxiumum zoom is normally 18-22.'>zoom</span> or <span style='cursor:help;' title='To search using a British National Grid reference, just type it in the search box and hit the button! You can use 2, 4, 6, 8 or 10-digit grid refs with the 2-letter prefix but no spaces in the number (e.g. SU12344225) or absolute grid refs with a comma but no prefix (e.g. 439668,1175316).'>Grid Ref</span>";
   				}
   				if (window.pnlOpen === false) {
   					$(".leaflet-control-toolbar,.groundspeak-control-findmylocation,.leaflet-control-scale,.gme-left").css("left","30px");
@@ -1468,7 +1468,7 @@
   							GME_displayPoints(JSON.parse(b64decode(localStorage.GME_cache)), GME_control._map, "clickthru");
   							delete localStorage.GME_cache;
   						} catch (e) {
-  							console.error("GME Can't pop cache: " + e);
+  							console.error("GMECZ nemůže ulovit keš: " + e);
   						}
   					}
   				}
@@ -1551,7 +1551,7 @@
   				function getLogPoints (layer) {
   					if (layer._latlng && layer._popup && layer._popup._content && ~layer._popup._content.indexOf(name)) {
   						coords = layer._latlng;
-  						$(caches[i].parentNode.parentNode.children[0]).append("<br/><a href='#GME_map_anchor'><img src='https://www.geocaching.com/images/silk/map.png' width='16' height='16' alt='Map' class='gme-action' data-gme-ref='" + coords.lat + "," + coords.lng + "' title='Centre map on this geocache'/></a> #" + layer._icon.innerHTML);
+  						$(caches[i].parentNode.parentNode.children[0]).append("<br/><a href='#GME_map_anchor'><img src='https://www.geocaching.com/images/silk/map.png' width='16' height='16' alt='Map' class='gme-action' data-gme-ref='" + coords.lat + "," + coords.lng + "' title='Centrovat mapu na tuto keš'/></a> #" + layer._icon.innerHTML);
   						return;
   					}
   				}
@@ -1601,11 +1601,11 @@
   					getGPX:function() {
   						var name = $(".CommonUsername").attr("title"),
   							author = name ?
-  								(name + '</name>\r\n\t\t\t<link href="https://www.geocaching.com/profile/?u=' + name + '"><text>' + name + '\'s profile</text></link>\r\n') :
-  								"Geocaching.com user</name>\r\n",
+  								(name + '</name>\r\n\t\t\t<link href="https://www.geocaching.com/profile/?u=' + name + '"><text>' + name + '\'s profil</text></link>\r\n') :
+  								"Geocaching.com uživatel</name>\r\n",
   							date = !!Date.prototype.toISOString ? ["\t\t<time>", new Date().toISOString(), "</time>\r\n"].join("") : "",
   							i, l,
-  							gpx = ["<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<gpx creator=\"Geocaching Map Enhancements v", that.getVersion(), "\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" version=\"1.1\" xsi:schemaLocation=\"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd\" xmlns=\"http://www.topografix.com/GPX/1/1\">\r\n\t<metadata>\r\n\t\t<name>GME Export</name>\r\n\t\t<desc>Route file exported from Geocaching.com using Geocaching Map Enhancements.</desc>\r\n\t\t<author>\r\n\t\t\t<name>", author, "\t\t</author>\r\n", date, "\t</metadata>\r\n"].join("");
+  							gpx = ["<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<gpx creator=\"Geocaching Map Enhancements CZ v", that.getVersion(), "\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" version=\"1.1\" xsi:schemaLocation=\"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd\" xmlns=\"http://www.topografix.com/GPX/1/1\">\r\n\t<metadata>\r\n\t\t<name>GMECZ Export</name>\r\n\t\t<desc>Route file exported from Geocaching.com using Geocaching Map Enhancements CZ.</desc>\r\n\t\t<author>\r\n\t\t\t<name>", author, "\t\t</author>\r\n", date, "\t</metadata>\r\n"].join("");
   						for (i = 0, l = this._latlngs.length; i < l; i++) {
   							gpx += [ "\t<wpt lat=\"", this._latlngs[i].lat, "\" lon=\"", this._latlngs[i].lng, "\">\r\n\t\t<name>P", i, "</name>\r\n\t\t<type>Waypoint</type>\r\n\t</wpt>\r\n"].join("");
   						}
@@ -1640,10 +1640,10 @@
   					_addMarker: function(pt, num) {
   						var mark = new L.Marker(pt, {
   							icon: new L.Icon({draggable: "true", iconUrl: icons.marker, iconSize: new L.Point(15, 25), iconAnchor: new L.Point(8,25)}),
-  							zIndexOffset:99, title: "Route Point #"+num
+  							zIndexOffset:99, title: "navigační bod #"+num
   						});
   						mark._routeNum = num;
-  						mark.bindPopup(["<p><strong>Route Point #", num, "</strong><br/>Centre: ",pt.toUrl(),"<br/><strong>",DMM(pt),"</strong><br/><span style='float:right;'><a class='gme-event' data-gme-action='removeDistMarker' data-gme-layer='", this._leaflet_id, "' data-gme-ref='",num,"'>Clear</a>, <a class='gme-event' data-gme-layer='", this._leaflet_id, "' data-gme-action='clearDist'>Clear All</a>, <a class='gme-event gme-draggable-gpx' data-gme-action='exportDist' data-gme-layer='", this._leaflet_id, "' draggable='true'>GPX</a></span></p>"].join(""));
+  						mark.bindPopup(["<p><strong>navigační bod #", num, "</strong><br/>střed: ",pt.toUrl(),"<br/><strong>",DMM(pt),"</strong><br/><span style='float:right;'><a class='gme-event' data-gme-action='removeDistMarker' data-gme-layer='", this._leaflet_id, "' data-gme-ref='",num,"'>Clear</a>, <a class='gme-event' data-gme-layer='", this._leaflet_id, "' data-gme-action='clearDist'>Vymazat vše</a>, <a class='gme-event gme-draggable-gpx' data-gme-action='exportDist' data-gme-layer='", this._leaflet_id, "' draggable='true'>GPX</a></span></p>"].join(""));
   						mark.on("dragend", this._moveMarker, this);
   						this._markers.addLayer(mark);
   						if (mark.dragging) {
@@ -2038,13 +2038,13 @@
   							map.off("locationfound",located);
   							tracking = false;
   							$(".groundspeak-control-findmylocation-lnk").removeClass("gme-button-active");
-  							$("#GME_loc").attr("title","Follow My Location");
+  							$("#GME_loc").attr("title","Sledování mé polohy");
   						} else {
   							map.on("locationfound",located);
   							map.locate({enableHighAccuracy:true,watch:true,timeout:60000});
   							tracking = true;
   							$(".groundspeak-control-findmylocation-lnk").addClass("gme-button-active");
-  							$("#GME_loc").attr("title","Stop following");
+  							$("#GME_loc").attr("title","Přestat sledovat");
   						}
   					}
   					function click_once(e) {
@@ -2053,7 +2053,7 @@
   					}
   					el = document.createElement("a");
   					el.id="GME_loc";
-  					el.title=that.parameters.follow?"Follow My Location":"Find My Location";
+  					el.title=that.parameters.follow?"Sledování mé polohy":"Najít mou polohu";
   					el.className="groundspeak-control-findmylocation-lnk";
   					if (that.parameters.follow) {
   						L.DomEvent.addListener(el,"click",click,map);
@@ -2219,7 +2219,7 @@
 					group = new L.LayerGroup([circle, new L.CircleMarker(ll, {weight:2, radius:3})]);
 					this._markers.addLayer(group);
 					r = (radius / m).toFixed(3) + " " + unit;
-					circle.bindPopup("<p><strong>" + label + "</strong><br/>Radius: " + r + "<br/>Centre: decimal " + ll.toUrl() + "<br/><strong>" + DMM(ll) + "</strong><br/><span style='float:right;'><a class='gme-event' data-gme-action='removeMarker' data-gme-ref='" + group._leaflet_id + "'>Clear</a>, <a class='gme-event' data-gme-action='clearMarkers'>Clear All</a></span></p>");
+					circle.bindPopup("<p><strong>" + label + "</strong><br/>Poloměr: " + r + "<br/>střed: decimal " + ll.toUrl() + "<br/><strong>" + DMM(ll) + "</strong><br/><span style='float:right;'><a class='gme-event' data-gme-action='removeMarker' data-gme-ref='" + group._leaflet_id + "'>smazat</a>, <a class='gme-event' data-gme-action='clearMarkers'>smazat vše</a></span></p>");
 				},
 				getPostcode:function(coords) {
 					var that = this, callprefix="GME_postcode_callback",call;
@@ -2229,10 +2229,10 @@
 							if (json.result && json.result.length > 0) {
 								m = "<p>" + json.result[0].postcode + (json.result[0].parish ? (", " + json.result[0].parish) :	 "") + (json.result[0].admin_ward ? (", " + json.result[0].admin_ward) :	"") + "</p>";
 							} else {
-								m = "<p>No postcode found for this location.<br />Is it within 500m of an occupied building?</p>";
+								m = "<p>Pro tuto lokalitu nebylo nalezeno žádné poštovní směrovací číslo.<br />Nachází se ve vzdálenosti do 500 m od obydlené budovy?</p>";
 							}
 						} else {
-							m = "<p>Error fetching data from postcodes.io</p>";
+							m = "<p>Chyba při načítání dat z postcodes.io</p>";
 						}
 						if (json.result && !isNaN(json.result[0].latitude) && !isNaN(json.result[0].longitude)) {
 							L.popup().setLatLng({lat: json.result[0].latitude, lng: json.result[0].longitude}).setContent(m).openOn(that._map);
@@ -2247,7 +2247,7 @@
 						window[call] = makeCallback(call);
 						JSONP("https://api.postcodes.io/postcodes/lon/" + coords.lng + "/lat/" + coords.lat + "?radius=500&limit=1&callback=" + call, call);
 					} else {
-						console.error("GMECZ: Bad coordinates to getPostcode");
+						console.error("GMECZ: Špatné souřadnice na getPostcode");
 					}
 				},
 				panToHome:function () {
@@ -2288,14 +2288,14 @@
                         name: "Coords",
                         getHTML: function(coords, zoom, map) {
                             var ll = coords.toUrl();
-                            return "<strong>" + DMM(coords) + "</strong><br/>Dec: <a href='geo:" + ll + "?z=" + zoom + "'>" + ll + "</a></br>";
+                            return "<strong>" + DMM(coords) + "</strong><br/>DEC: <a href='geo:" + ll + "?z=" + zoom + "'>" + ll + "</a></br>";
                         },
                         isValid: function(coords, zoom) { return true; }
                     },
                     {
                         name: "List caches",
                         getHTML: function(coords, zoom, map) {
-                            return "<a title='List " + (that.parameters.filterFinds ? "unfound " : "") + "caches near point' href='https://www.geocaching.com/seek/nearest.aspx?lat=" + coords.lat + "&lng=" + coords.lng + (that.parameters.filterFinds ? "&f=1" : "") + "' target='_blank' rel='noopener noreferrer'>List caches</a>";
+                            return "<a title='Přejít na web " + (that.parameters.filterFinds ? "unfound " : "") + "s nejbližsími keškami' href='https://www.geocaching.com/seek/nearest.aspx?lat=" + coords.lat + "&lng=" + coords.lng + (that.parameters.filterFinds ? "&f=1" : "") + "' target='_blank' rel='noopener noreferrer'>Seznam keší</a>,&nbsp;";
                         },
                         isValid: function(coords, zoom) { return true; }
                     },
@@ -2303,7 +2303,7 @@
                         name: "Geograph",
                         action: "getGeograph",
                         getHTML: function(coords, zoom, map) {
-                            return "<a href='#' title='Show Geograph images near this point' class='gme-event' data-gme-action='getGeograph' data-gme-coords='" + coords.toUrl() + "'>Geograph</a>";
+                            return "";//"<a href='#' title='Show Geograph images near this point' class='gme-event' data-gme-action='getGeograph' data-gme-coords='" + coords.toUrl() + "'>Geograph</a>,&nbsp;";
                         },
                         isValid: function(coords, zoom) {
                             return	bounds_GB.contains(coords) || bounds_DE.contains(coords) || bounds_IE.contains(coords) || bounds_CI.contains(coords);
@@ -2312,7 +2312,7 @@
                     {
                         name: "Directions",
                         getHTML: function(coords, zoom, map) {
-                            return "<a title='Launch Google Directions from home to this point' target='_blank' rel='noopener noreferrer' href='https://www.google.com/maps/dir/?api=1&origin=" + gmeConfig.env.home.toUrl() + "&destination=" + coords.toUrl() + "'>Directions</a>";
+                            return "";//""<a title='Launch Google Directions from home to this point' target='_blank' rel='noopener noreferrer' href='https://www.google.com/maps/dir/?api=1&origin=" + gmeConfig.env.home.toUrl() + "&destination=" + coords.toUrl() + "'>Directions</a>,&nbsp;";
                         },
                         isValid: function(coords, zoom) {
                             return !!gmeConfig.env.home;
@@ -2322,7 +2322,7 @@
                         name: "Wikimapia",
                         getHTML: function(coords, zoom, map) {
                             var centre = map.getCenter();
-                            return "<a title='Go to wikimapia' target='_blank' rel='noopener noreferrer' href='http://wikimapia.org/#lat=" + centre.lat + "&lon=" + centre.lng + "&z=" + zoom + "'>Wikimapia</a>";
+                            return "";//""<a title='Go to wikimapia' target='_blank' rel='noopener noreferrer' href='http://wikimapia.org/#lat=" + centre.lat + "&lon=" + centre.lng + "&z=" + zoom + "'>Wikimapia</a>,&nbsp;";
                         },
                         isValid: function(coords, zoom) {
                             return true;
@@ -2331,7 +2331,7 @@
                     {
                         name: "Marker",
                         getHTML: function(coords, zoom, map) {
-                            return "<a title='Drop route marker onto map' href='#' class='gme-event' data-gme-action='dropMarker' data-gme-coords='" + coords.toUrl() + "'>Marker</a>";
+                            return "<a title='Drop route marker onto map' href='#' class='gme-event' data-gme-action='dropMarker' data-gme-coords='" + coords.toUrl() + "'>značkovač</a>,&nbsp;";
                         },
                         isValid: function(coords, zoom) {
                             return true;
@@ -2341,7 +2341,7 @@
                         name: "MAGIC",
                         getHTML: function(coords, zoom, map) {
                             var b = map.getBounds();
-                            return "<a title='Show MAGIC map of environmentally sensitive areas' target='_blank' rel='noopener noreferrer' href='http://magic.defra.gov.uk/MagicMap.aspx?srs=WGS84&startscale=" + (Math.cos(map.getCenter().lat * L.LatLng.DEG_TO_RAD) * 684090188 * Math.abs(b.getSouthWest().lng - b.getSouthEast().lng)) / map.getSize().x +	"&layers=LandBasedSchemes,12,24:HabitatsAndSpecies,38:Designations,6,10,13,16,34,37,40,72,94&box=" + b.toBBoxString().replace(/,/g,":") + "'>MAGIC</a>";
+                            return "<a title='Show MAGIC map of environmentally sensitive areas' target='_blank' rel='noopener noreferrer' href='http://magic.defra.gov.uk/MagicMap.aspx?srs=WGS84&startscale=" + (Math.cos(map.getCenter().lat * L.LatLng.DEG_TO_RAD) * 684090188 * Math.abs(b.getSouthWest().lng - b.getSouthEast().lng)) / map.getSize().x +	"&layers=LandBasedSchemes,12,24:HabitatsAndSpecies,38:Designations,6,10,13,16,34,37,40,72,94&box=" + b.toBBoxString().replace(/,/g,":") + "'>MAGIC</a>,&nbsp;";
                         },
                         isValid: function(coords, zoom) {
                             return that.isInUK(coords);
@@ -2350,7 +2350,7 @@
                     {
                         name: "Postcode",
                         getHTML: function(coords, zoom, map) {
-                            return "<a title='Fetch location data from postcodes.io' href='#' class='gme-event' data-gme-action='getPostcode' data-gme-coords='" + coords.toUrl() + "'>Postcode</a>";
+                            return "<a title='Fetch location data from postcodes.io' href='#' class='gme-event' data-gme-action='getPostcode' data-gme-coords='" + coords.toUrl() + "'>Postcode</a>,&nbsp;";
                         },
                         isValid: function(coords, zoom) {
                             return that.isInUK(coords);
@@ -2359,7 +2359,7 @@
                     {
                         name: "Height",
                         getHTML: function(coords, zoom, map) {
-                            return "<a title='Height of point above sea level' href='#' class='gme-event' data-gme-action='getHeight' data-gme-coords='" + coords.toUrl() + "'>Height</a>";
+                            return "<a title='Height of point above sea level' href='#' class='gme-event' data-gme-action='getHeight' data-gme-coords='" + coords.toUrl() + "'>nadm. výška</a>,&nbsp;";
                         },
                         isValid: function(coords, zoom) {
                             return (coords.lat > -65 && coords.lat < 83);
@@ -2368,7 +2368,7 @@
                     {
                         name: "StreetView",
                         getHTML: function(coords, zoom, map) {
-                            return "<a title='Launch Google Streetview' target='_blank' rel='noopener noreferrer' href='https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=" + coords.toUrl() + "'>Streetview</a>";
+                            return "<a title='Launch Google Streetview' target='_blank' rel='noopener noreferrer' href='https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=" + coords.toUrl() + "'>StreetView</a>,&nbsp;";
                         },
                         isValid: function(coords, zoom) {
                             return true;
@@ -2378,7 +2378,7 @@
                         name: "MapApp",
                         getHTML: function(coords, zoom, map) {
                             /* Open Bing Maps app if available, otherwise use a cross-platform Google Maps URI */
-                            return "<a title='Launch Bing Maps' href='bingmaps:?cp=" + coords.lat + "~" + coords.lng + "' target='_blank' rel='noopener noreferrer'><a title='Launch Google Maps' href='https://www.google.com/maps/@?api=1&map_action=map&center=" + coords.toUrl() + "&zoom=" + zoom + "' target='_blank' rel='noopener noreferrer'>Maps</a></a>";
+                            return "";//"<a title='Launch Bing Maps' href='bingmaps:?cp=" + coords.lat + "~" + coords.lng + "' target='_blank' rel='noopener noreferrer'><a title='Launch Google Maps' href='https://www.google.com/maps/@?api=1&map_action=map&center=" + coords.toUrl() + "&zoom=" + zoom + "' target='_blank' rel='noopener noreferrer'>Maps</a></a>,&nbsp;";
                         },
                         isValid: function(coords, zoom) {
                             return true;
@@ -2532,13 +2532,13 @@
                 c = JSON.parse(r.substring(k + 12, r.indexOf("}", k) + 1));
                 map.panTo(new L.LatLng(c.lat, c.lng));
               } catch (e) {
-                console.warn("GME: Couldn't extract cache coordinates:" + e + "\nReceived " + r.length + " bytes, coords at " + k);
+                console.warn("GMECZ: Nelze extrahovat souřadnice keše:" + e + "\nObdrženo " + r.length + " bytů, souřadnice na " + k);
               }
             } else {
               if (req.status === 404) {
-                alert("Sorry, cache " + gc + " doesn't seem to exist.");
+                alert("Sorry, keška " + gc + " asi neexistuje.");
               }
-              console.warn("GME: error retrieving cache page to find coords for " + gc + ": " + req.statusText);
+              console.warn("GMECZ: chyba při načítání stránky keší pro nalezení souřadnic pro " + gc + ": " + req.statusText);
             }
           });
           req.open("GET", "https://www.geocaching.com/geocache/" + gc);
@@ -2548,7 +2548,7 @@
 					var map = this._map || e;
 
 					if (!map.getBounds) {
-						console.warn("updateScale didn't have working map");
+						console.warn("aktualizace měřítka neměla funkční mapu");
 						return;
 					}
 
@@ -2711,7 +2711,7 @@ function insertPage(div, src, title, back) {
 		var d = document.createElement('div');
 		d.id = div;
 		d.title = title||'';
-		d.innerHTML = ['<div><a href="#',back||'','" title="Close" class="gme-close-dialog">❌</a><header>',d.title, '</header><div class="gme-modal-content">', src, '</div></div>'].join('');
+		d.innerHTML = ['<div><a href="#',back||'','" title="zavřít" class="gme-close-dialog">❌</a><header>',d.title, '</header><div class="gme-modal-content">', src, '</div></div>'].join('');
 		d.className = 'gme-modalDialog';
 		document.documentElement.lastChild.appendChild(d);
 	} else {
@@ -2774,12 +2774,12 @@ function xhr(e) {
 if (window.top !== window.self) { return; }
 
 if(!(typeof JSON === 'object' && typeof JSON.parse === 'function')) {
-	console.error("Geocaching Map Enhancements requires a browser with JSON support.");
+	console.error("GMECZ vyžaduje prohlížeč s podporou JSON.");
 	return;
 }
 
 if(document.querySelector("head[data-gme-version]")) {
-	console.error("Aborting: GME already running on page: " + document.location);
+	console.error("Přerušení: GMECZ již běží na stránce: " + document.location);
 	return;
 }
 document.documentElement.firstChild.setAttribute("data-gme-version", gmeResources.parameters.version);
@@ -2795,7 +2795,7 @@ try {
 	if (window.localStorage !== undefined && window.localStorage !== null) { gmeResources.env.storage = true; }
 } catch (e) {
 	/*Potential security exception*/
-	console.warn("No localStorage capability - GME cannot set configuration");
+	console.warn("Žádná možnost místního úložiště - GMECZ nemůže uložit konfiguraci");
 }
 
 if(gmeResources.env.storage) {
@@ -2819,23 +2819,23 @@ if(gmeResources.env.storage) {
 							if (storedParams[a]===undefined){storedParams[a]=gmeResources.parameters[a];}
 						}
 					}
-					alert("Geocaching Map Enhancements has been updated to v" + gmeResources.parameters.version + ". " + gmeResources.parameters.versionMsg);
+					alert("GMECZ byl aktualizován na v" + gmeResources.parameters.version + ". " + gmeResources.parameters.versionMsg);
 					storedParams.version = gmeResources.parameters.version;
 					localStorage.setItem("GME_parameters",JSON.stringify(storedParams));
 				}
 				if (typeof storedParams.maps === "string") {
-					console.info("GMECZ: Trying to fix corrupted map settings.");
+					console.info("GMECZ: Pokus o opravu poškozeného nastavení mapy.");
 					storedParams.maps = JSON.parse(storedParams.maps);
 				}
 				gmeResources.parameters = storedParams;
 			} catch (e) {
-				console.warn("GME: Could not parse stored configuration parameters.");
+				console.warn("GME: Nepodařilo se analyzovat uložené konfigurační parametry.");
 			}
 		}
 		/* Import old-style custom maps */
 		customJSON = localStorage.getItem("GME_custom");
 		if (customJSON) {
-			console.info("GMECZ: Found stored custom settings");
+			console.info("GMECZ: Nalezená uložená vlastní nastavení");
 			try {
 				GME_custom = JSON.parse(customJSON);
 				if (GME_custom.maps && GME_custom.maps.length > 0) {
@@ -2843,7 +2843,7 @@ if(gmeResources.env.storage) {
 				}
 				delete localStorage.GME_custom;
 			} catch (e) {
-				console.warn("GMECZ: Could not parse stored custom maps.");
+				console.warn("GMECZ: Nelze analyzovat uložené vlastní mapy.");
 			}
 		}
 		/* Remove old-style builtin maps */
@@ -2872,7 +2872,7 @@ if(gmeResources.env.storage) {
 
 		localStorage.setItem("GME_parameters",JSON.stringify(gmeResources.parameters));
 	} catch (e){
-		console.error("GMECZ: Bad Exception: " + e);
+		console.error("GMECZ: Zlá výjimka: " + e);
 		/* Potential security exception. Carry on with default parameters, but block localstorage */
 		gmeResources.env.storage = false;
 	}
@@ -2881,10 +2881,10 @@ if(gmeResources.env.storage) {
 document.addEventListener("GME_XHR_event", xhr);
 
 if (!gmeResources.env.geolocation) {
-	gmeResources.script.dist = function () { console.warn("GMECZ: Geolocation not available"); };
+	gmeResources.script.dist = function () { console.warn("GMECZ: Geolokace není k dispozici"); };
 }
 if (!gmeResources.env.dragdrop) {
-	gmeResources.script.drag = function () { console.warn("GMECZ: Drag and Drop not available"); };
+	gmeResources.script.drag = function () { console.warn("GMECZ: Funkce Drag and Drop není k dispozici"); };
 	gmeResources.script.drop = gmeResources.script.drag;
 }
 
@@ -2904,7 +2904,7 @@ switch(gmeResources.env.page) {
 		// On a geocache listing
 		if (!gmeResources.env.loggedin) {
 			// Not logged in, so no maps or coordinates...
-			console.log("GME: Couldn't detect log-in.  Exiting...");
+			console.log("GME: Nepodařilo se zjistit přihlášení.  Ukončení...");
 			return;
 		}
 		if (gmeResources.env.dragdrop) { insertCSS(gmeResources.css.drag); }

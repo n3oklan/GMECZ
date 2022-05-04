@@ -1,6 +1,6 @@
   // ==UserScript==
   // @name        GMECZ
-  // @version     0.3.1
+  // @version     0.4.0
   // @author      n3oklan
   // @oujs:author n3oklan
   // @namespace   https://gmecz.geosever.cz
@@ -19,8 +19,8 @@
   // @connect     api.geonames.org
   // @connect     api.postcodes.io
   // @connect     www.geocaching.com
-  // @icon        https://raw.githubusercontent.com/n3oklan/GMECZ/main/icons/gs_ikona.png
-  // @icon64      https://raw.githubusercontent.com/n3oklan/GMECZ/main/icons/gs_ikona.png
+  // @icon        https://gmecz.geosever.cz/gs_ikona.png
+  // @icon64      https://gmecz.geosever.cz/gs_ikona.png
   // @updateURL   https://raw.githubusercontent.com/n3oklan/GMECZ/main/GeocachingMapEnhancements.meta.js
   // @downloadURL https://raw.githubusercontent.com/n3oklan/GMECZ/main/Geocaching_Map_Enhancements.user.js
   // ==/UserScript==
