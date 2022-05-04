@@ -19,8 +19,8 @@
   // @connect     api.geonames.org
   // @connect     api.postcodes.io
   // @connect     www.geocaching.com
-  // @icon        https://raw.githubusercontent.com/n3oklan/GMECZ/main/icons/gs_ikona.png
-  // @icon64      https://raw.githubusercontent.com/n3oklan/GMECZ/main/icons/gs_ikona.png
+  // @icon        https://gmecz.geosever.cz/icons/gs_ikona.png
+  // @icon64      https://gmecz.geosever.cz/icons/gs_ikona.png
   // @updateURL   https://raw.githubusercontent.com/n3oklan/GMECZ/main/GeocachingMapEnhancements.meta.js
   // @downloadURL https://raw.githubusercontent.com/n3oklan/GMECZ/main/Geocaching_Map_Enhancements.user.js
   // ==/UserScript==
@@ -233,15 +233,15 @@
   			.gme-button-active {border:solid 3px #02b; padding:1px 0 1px 1px; background-color:#fff;}\
   			.gme-button-active:hover {border-color:#63f;filter:alpha(opacity=100);}\
   			span.gme-button, .gme-button-wide { padding-left:5px; padding-right:5px; font-size:12px; font-weight:bold; width:auto; background-image:none; color: #424242; }\
-  			.GME_home {background: url(https://raw.githubusercontent.com/n3oklan/GMECZ/main/icons/home.png) no-repeat center center #eee;}\
-  			.GME_config {background: url(https://raw.githubusercontent.com/n3oklan/GMECZ/main/icons/gear.png) no-repeat center center #eee;}\
-  			.GME_GS {background: url(https://raw.githubusercontent.com/n3oklan/GMECZ/main/icons/gs_ikona_20.png) no-repeat center center #eee;}\
-  			.GME_hide {background: url(https://raw.githubusercontent.com/n3oklan/GMECZ/main/icons/closed_eye.png) no-repeat center center #eee;}\
-  			.GME_hide.gme-button-active {background: url(https://raw.githubusercontent.com/n3oklan/GMECZ/main/icons/open_eye.png) no-repeat center center #eee;}\
-        	.GME_route {background: url(https://raw.githubusercontent.com/n3oklan/GMECZ/main/icons/gps-connected.png) no-repeat center center #eee;}\
-  			.GME_route.gme-button-active {background: url(https://raw.githubusercontent.com/n3oklan/GMECZ/main/icons/gps-disconnected.png) no-repeat center center #eee;}\
-  			.GME_info {background: url(https://raw.githubusercontent.com/n3oklan/GMECZ/main/icons/pin.png) no-repeat center center #eee;}\
-  			.GME_info.gme-button-active {background: url(https://raw.githubusercontent.com/n3oklan/GMECZ/main/icons/unpin.png) no-repeat center center #eee;}\
+  			.GME_home {background: url(https://gmecz.geosever.cz/icons/home.png) no-repeat center center #eee;}\
+  			.GME_config {background: url(https://gmecz.geosever.cz/icons/gear.png) no-repeat center center #eee;}\
+  			.GME_GS {background: url(https://gmecz.geosever.cz/icons/gs_ikona_20.png) no-repeat center center #eee;}\
+  			.GME_hide {background: url(https://gmecz.geosever.cz/icons/closed_eye.png) no-repeat center center #eee;}\
+  			.GME_hide.gme-button-active {background: url(https://gmecz.geosever.cz/icons/open_eye.png) no-repeat center center #eee;}\
+        	.GME_route {background: url(https://gmecz.geosever.cz/icons/gps-connected.png) no-repeat center center #eee;}\
+  			.GME_route.gme-button-active {background: url(https://gmecz.geosever.cz/icons/gps-disconnected.png) no-repeat center center #eee;}\
+  			.GME_info {background: url(https://gmecz.geosever.cz/icons/pin.png) no-repeat center center #eee;}\
+  			.GME_info.gme-button-active {background: url(https://gmecz.geosever.cz/icons/unpin.png) no-repeat center center #eee;}\
   			.gme-button-refresh-labels { background-position: -320px 4px;}\
   			.gme-button-clear-labels { background-position: -69px 4px;}\
   			.gme-scale-container {border: 1px solid #012345;}\
