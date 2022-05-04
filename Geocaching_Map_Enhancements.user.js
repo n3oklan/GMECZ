@@ -1,6 +1,6 @@
   // ==UserScript==
   // @name        GMECZ
-  // @version     0.4.0
+  // @version     0.4.1
   // @author      n3oklan
   // @oujs:author n3oklan
   // @namespace   https://gmecz.geosever.cz
@@ -34,8 +34,8 @@
   var gmeResources = {
   	parameters: {
   		// Defaults
-  		version: "0.3.1",
-  		versionMsg: "Kosmetické úpravy",
+  		version: "0.4.1",
+  		versionMsg: "Kosmetické úpravy, aktualizace map, korekce češtiny",
   		brightness: 1,	// Default brightness for maps (0-1), can be overridden by custom map parameters.
   		filterFinds: false, // True filters finds out of list searches.
   		follow: false,	// Locator widget follows current location (moving map mode)

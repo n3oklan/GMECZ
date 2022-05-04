@@ -1,6 +1,6 @@
   // ==UserScript==
   // @name        GMECZ
-  // @version     0.4.0
+  // @version     0.4.1
   // @author      n3oklan
   // @oujs:author n3oklan
   // @namespace   https://gmecz.geosever.cz
