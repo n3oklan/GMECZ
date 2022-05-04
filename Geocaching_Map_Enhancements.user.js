@@ -1,6 +1,6 @@
   // ==UserScript==
   // @name        GMECZ
-  // @version     0.3.0
+  // @version     0.3.1
   // @author      n3oklan
   // @oujs:author n3oklan
   // @namespace   https://gmecz.geosever.cz
@@ -19,10 +19,10 @@
   // @connect     api.geonames.org
   // @connect     api.postcodes.io
   // @connect     www.geocaching.com
-  // @icon        https://gmecz.geosever.cz/gs_ikona.png
-  // @icon64      https://gmecz.geosever.cz/gs_ikona.png
-  // @updateURL   https://github.com/n3oklan/GMECZ/raw/main/GeocachingMapEnhancements.meta.js
-  // @downloadURL https://github.com/n3oklan/GMECZ/raw/main/Geocaching_Map_Enhancements.user.js
+  // @icon        https://raw.githubusercontent.com/n3oklan/GMECZ/main/icons/gs_ikona.png
+  // @icon64      https://raw.githubusercontent.com/n3oklan/GMECZ/main/icons/gs_ikona.png
+  // @updateURL   https://raw.githubusercontent.com/n3oklan/GMECZ/main/GeocachingMapEnhancements.meta.js
+  // @downloadURL https://raw.githubusercontent.com/n3oklan/GMECZ/main/Geocaching_Map_Enhancements.user.js
   // ==/UserScript==
 
   /* jshint multistr: true */
@@ -34,7 +34,7 @@
   var gmeResources = {
   	parameters: {
   		// Defaults
-  		version: "0.3.0",
+  		version: "0.3.1",
   		versionMsg: "Kosmetické úpravy",
   		brightness: 1,	// Default brightness for maps (0-1), can be overridden by custom map parameters.
   		filterFinds: false, // True filters finds out of list searches.
@@ -45,21 +45,174 @@
   		defaultMap: "Mapy.cz - Turistická",
   		maps: [
   	//	{alt:"Readable Name", tileUrl: "URL template including {s} (subdomain) and either {q} (quadkey) or {x},{y},{z} (Google/TMS tile coordinates + zoom)", subdomains: "0123", minZoom: 0, maxZoom: 24, attribution: "Copyright message (HTML allowed)", name: "shortname", overlay:false }
-  			{alt:"Mapy.cz - Základní",tileUrl:"//mapserver.mapy.cz/base-m/{z}-{x}-{y}",minZoom:5,maxZoom:18,attribution:"<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /><a href='https://licence.mapy.cz/?doc=mapy_pu'><img src='https://api.mapy.cz/img/api/logo.svg' height='16px' /></a>"},
-  			{alt:"Mapy.cz - Turistická",tileUrl:"//mapserver.mapy.cz/turist-m/{z}-{x}-{y}",minZoom:5,maxZoom:18,attribution:"<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /><a href='https://licence.mapy.cz/?doc=mapy_pu'><img src='https://api.mapy.cz/img/api/logo.svg' height='16px' /></a>"},
-  			{alt:"Mapy.cz - Dopravní",tileUrl:"//mapserver.mapy.cz/base-m/{z}-{x}-{y}?s=0.2&dm=Luminosity",minZoom:5,maxZoom:18,attribution:"<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /><a href='https://licence.mapy.cz/?doc=mapy_pu'><img src='https://api.mapy.cz/img/api/logo.svg' height='16px' /></a>"}, 			
-        {alt:"Mapy.cz - Zeměpisná",tileUrl:"//mapserver.mapy.cz/zemepis-m/{z}-{x}-{y}",minZoom:5,maxZoom:18,attribution:"<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /><a href='https://licence.mapy.cz/?doc=mapy_pu'><img src='https://api.mapy.cz/img/api/logo.svg' height='16px' /></a>"},
-  			{alt:"Mapy.cz - Letecká",tileUrl:"//mapserver.mapy.cz/bing/{z}-{x}-{y}",minZoom:5,maxZoom:20,attribution:"<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /><a href='https://licence.mapy.cz/?doc=mapy_pu'><img src='https://api.mapy.cz/img/api/logo.svg' height='16px' /></a>"},
-        {alt:"Mapy.cz - ČB",tileUrl:"//mapserver.mapy.cz/base-m/{z}-{x}-{y}?s=0.01&dm=Luminosity",minZoom:5,maxZoom:18,attribution:"<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /><a href='https://licence.mapy.cz/?doc=mapy_pu'><img src='https://api.mapy.cz/img/api/logo.svg' height='16px' /></a>"},
-        {alt:"OpenStreetMap",tileUrl:"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",attribution:"<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /> OpenStreetMap",subdomains:"abc",ignore:false},
-  			{alt:"OpenTopoMap",tileUrl:"https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",attribution:"<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /> Kartendaten: © <a href='https://openstreetmap.org/copyright'>OpenStreetMap</a>-Mitwirkende, SRTM | Kartendarstellung: © <a href='http://opentopomap.org'>OpenTopoMap</a> (<a href='https://creativecommons.org/licenses/by-sa/3.0/'>CC-BY-SA</a>)",subdomains:"abc",ignore:false},
-  			{alt:"MTB mapa",tileUrl:"http://tile.mtbmap.cz/mtbmap_tiles/{z}/{x}/{y}.png",minZoom:6,maxZoom:18,attribution:"<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /> Martin Tesař, OpenStreetMap a USGS"},
-  			{alt:"ČUZK - 1:25000","tileUrl":"http://geoportal.cuzk.cz/WMS_ZM25_PUB/WMService.aspx","crs":"EPSG:4326","layers":"GR_ZM25","format":"image/png","transparent":false,"attribution":"<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /> Český úřad zeměměřický a katastrální","overlay":false,"ignore":false,"minZoom":11,"maxZoom":15},
-  			{alt:"ČUZK - Satelitní",tileUrl:"http://geoportal.cuzk.cz/WMS_ORTOFOTO_PUB/WMService.aspx",crs:"EPSG:4326",layers:"GR_ORTFOTORGB",format:"image/png",transparent:false,attribution:"<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /> Český úřad zeměměřický a katastrální",overlay:false,ignore:false,minZoom:10,maxZoom:20},
-  			{alt:"Stínování terénu", tileUrl:"http://{s}.tiles.wmflabs.org/hillshading/{z}/{x}/{y}.png", subdomains: "abc", attribution:"Hillshading by <a href=\'https://wiki.openstreetmap.org/wiki/Hike_%26_Bike_Map\'>Colin Marquardt</a> from NASA SRTM data", overlay: true},
-        {alt:"trasy - turistické ","tileUrl":"http://tile.waymarkedtrails.org/hiking/{z}/{x}/{y}.png ","name":"wmt","overlay":true,"ignore":false},
-        {alt:"trasy - cyklo ","tileUrl":"https://tile.waymarkedtrails.org/cycling/{z}/{x}/{y}.png ","name":"wmt","overlay":true,"ignore":false},
-  		]
+		{
+			"alt": "Mapy.cz - Základní",
+			"tileUrl": "//mapserver.mapy.cz/base-m/{z}-{x}-{y}",
+			"minZoom": 5,
+			"maxZoom": 18,
+			"attribution": "<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /><a href='https://licence.mapy.cz/?doc=mapy_pu'><img src='https://api.mapy.cz/img/api/logo.svg' height='16px' /></a>",
+			"ignore": false
+		},
+		{
+			"alt": "Mapy.cz - Turistická",
+			"tileUrl": "//mapserver.mapy.cz/turist-m/{z}-{x}-{y}",
+			"minZoom": 5,
+			"maxZoom": 18,
+			"attribution": "<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /><a href='https://licence.mapy.cz/?doc=mapy_pu'><img src='https://api.mapy.cz/img/api/logo.svg' height='16px' /></a>",
+			"ignore": false
+		},
+		{
+			"alt": "Mapy.cz - Dopravní",
+			"tileUrl": "//mapserver.mapy.cz/base-m/{z}-{x}-{y}?s=0.2&dm=Luminosity",
+			"minZoom": 5,
+			"maxZoom": 18,
+			"attribution": "<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /><a href='https://licence.mapy.cz/?doc=mapy_pu'><img src='https://api.mapy.cz/img/api/logo.svg' height='16px' /></a>",
+			"ignore": false
+		},
+		{
+			"alt": "Mapy.cz - Zeměpisná",
+			"tileUrl": "//mapserver.mapy.cz/zemepis-m/{z}-{x}-{y}",
+			"minZoom": 5,
+			"maxZoom": 18,
+			"attribution": "<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /><a href='https://licence.mapy.cz/?doc=mapy_pu'><img src='https://api.mapy.cz/img/api/logo.svg' height='16px' /></a>",
+			"ignore": false
+		},
+		{
+			"alt": "Mapy.cz - Letecká",
+			"tileUrl": "//mapserver.mapy.cz/bing/{z}-{x}-{y}",
+			"minZoom": 5,
+			"maxZoom": 20,
+			"attribution": "<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /><a href='https://licence.mapy.cz/?doc=mapy_pu'><img src='https://api.mapy.cz/img/api/logo.svg' height='16px' /></a>",
+			"ignore": false
+		},
+		{
+			"alt": "Mapy.cz - ČB",
+			"tileUrl": "//mapserver.mapy.cz/base-m/{z}-{x}-{y}?s=0.01&dm=Luminosity",
+			"minZoom": 5,
+			"maxZoom": 18,
+			"attribution": "<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /><a href='https://licence.mapy.cz/?doc=mapy_pu'><img src='https://api.mapy.cz/img/api/logo.svg' height='16px' /></a>",
+			"ignore": false
+		},
+		{
+			"alt": "OpenStreetMap",
+			"tileUrl": "//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+			"attribution": "<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /> OpenStreetMap",
+			"subdomains": "abc",
+			"ignore": false
+		},
+		{
+			"alt": "OpenTopoMap",
+			"tileUrl": "//{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
+			"attribution": "<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /> Kartendaten: © <a href='https://openstreetmap.org/copyright'>OpenStreetMap</a>-Mitwirkende, SRTM | Kartendarstellung: © <a href='http://opentopomap.org'>OpenTopoMap</a> (<a href='https://creativecommons.org/licenses/by-sa/3.0/'>CC-BY-SA</a>)",
+			"subdomains": "abc",
+			"ignore": false
+		},
+		{
+			"alt": "MTB mapa",
+			"tileUrl": "//tile.mtbmap.cz/mtbmap_tiles/{z}/{x}/{y}.png",
+			"minZoom": 6,
+			"maxZoom": 18,
+			"attribution": "<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /> Martin Tesař, OpenStreetMap a USGS",
+			"ignore": false
+		},
+		{
+			"alt": "ČUZK - 1:25000",
+			"tileUrl": "//geoportal.cuzk.cz/WMS_ZM25_PUB/WMService.aspx",
+			"crs": "EPSG:4326",
+			"layers": "GR_ZM25",
+			"format": "image/png",
+			"transparent": false,
+			"attribution": "<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /> Český úřad zeměměřický a katastrální",
+			"overlay": false,
+			"ignore": false,
+			"minZoom": 11,
+			"maxZoom": 15
+		},
+		{
+			"alt": "ČUZK - Satelitní",
+			"tileUrl": "//geoportal.cuzk.cz/WMS_ORTOFOTO_PUB/WMService.aspx",
+			"crs": "EPSG:4326",
+			"layers": "GR_ORTFOTORGB",
+			"format": "image/png",
+			"transparent": false,
+			"attribution": "<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg' height='16px' /> Český úřad zeměměřický a katastrální",
+			"overlay": false,
+			"ignore": false,
+			"minZoom": 10,
+			"maxZoom": 20
+		},
+		{
+			"alt": "trasy - turistické ",
+			"tileUrl": "//tile.waymarkedtrails.org/hiking/{z}/{x}/{y}.png ",
+			"name": "wmt",
+			"overlay": true,
+			"ignore": false
+		},
+		{
+			"alt": "trasy - cyklo ",
+			"tileUrl": "//tile.waymarkedtrails.org/cycling/{z}/{x}/{y}.png ",
+			"name": "wmt",
+			"overlay": true,
+			"ignore": false
+		},
+		{
+			"alt": "mapy IDNES",
+			"tileUrl": "//webtiles.timepress.cz/open/idnes_256/{z}/{x}/{y}",
+			"minZoom": 3,
+			"maxZoom": 16,
+			"attribution": "freytag & berndt, SHOCart",
+			"ignore": false
+		},
+		{
+			"alt": "Mapy.cz - Popisky",
+			"tileUrl": "//mapserver.mapy.cz/hybrid-sparse-m/{z}-{x}-{y}",
+			"minZoom": 5,
+			"maxZoom": 20,
+			"attribution": "© Seznam.cz, a.s.",
+			"overlay": true,
+			"ignore": false
+		},
+		{
+			"alt": "Mapy.cz - Popisky a cesty",
+			"tileUrl": "//mapserver.mapy.cz/hybrid-base-m/{z}-{x}-{y}",
+			"minZoom": 5,
+			"maxZoom": 20,
+			"attribution": "© Seznam.cz, a.s.",
+			"overlay": true,
+			"ignore": false
+		},
+		{
+			"alt": "Mapy.cz - Popisky a trasy",
+			"tileUrl": "//mapserver.mapy.cz/hybrid-turist-m/{z}-{x}-{y}",
+			"minZoom": 5,
+			"maxZoom": 20,
+			"attribution": "© Seznam.cz, a.s.",
+			"overlay": true,
+			"ignore": false
+		},
+		{
+			"alt": "ČUZK - Stínování",
+			"tileUrl": "http://ags.cuzk.cz/arcgis2/services/dmr5g/ImageServer/WMSServer",
+			"crs": "EPSG:4326",
+			"layers": "dmr5g:GrayscaleHillshade",
+			"format": "image/png",
+			"transparent": false,
+			"attribution": "© Český úřad zeměměřický a katastrální",
+			"opacity": "0.2",
+			"overlay": true,
+			"ignore": false,
+			"minZoom": 10,
+			"maxZoom": 20
+		},
+		{
+			"alt": "terrain stamen",
+			"tileUrl": "//stamen-tiles-b.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png",
+			"minZoom": 6,
+			"maxZoom": 17,
+			"attribution": "OpenStreetMap NPE",
+			"ignore": false
+		}
+	]
   	},
   	css: {
   		main: '.leaflet-control-gme,.leaflet-control-zoomwarning {border-radius:7px; filter: progid:DXImageTransform.Microsoft.gradient(startColorStr="#3F000000",EndColorStr="#3F000000"); padding:5px;z-index:8;}\
@@ -68,30 +221,30 @@
   			.gme-left {left: 385px; margin-left:13px !important;}\
   			div.gme-identify-layer {margin-top:-1em;margin-left:1em;padding-left:0.1em;font-weight:bold;background:rgba(255,255,255,0.57);}\
   			#gme_caches table { margin-top: 0.5em; }\
-  			.GME_search_list { border: 1px solid #679300; border-radius: 7px; padding: 0.5em; }\
+  			.GME_search_list { border: 1px solid #012345; border-radius: 7px; padding: 0.5em; }\
   			div.GME_search_results { margin-right: -65px; }\
   			.GME_search_results.hidden { display: none; }\
-  			.groundspeak-control-findmylocation { border: 1px solid #0088FF; border-radius: 5px; box-shadow: 0 0 8px rgba(0, 0, 0, 0.4); padding:0; background:rgba(255,255,255,0.8);}\
+  			.groundspeak-control-findmylocation { border: 1px solid #012345; border-radius: 5px; box-shadow: 0 0 8px rgba(0, 0, 0, 0.4); padding:0; background:rgba(255,255,255,0.8);}\
   			.groundspeak-control-findmylocation a { padding: 3px; }\
-  			.gme-button { display: inline-block; box-sizing: content-box; -moz-box-sizing: content-box; padding:3px; vertical-align:middle; background: #eee; background-color: rgba(255,255,255,0.8); border: 1px solid #0088FF; border-right:0; height:19px; width:19px; text-decoration: none; }\
-  			.gme-button-l { border-left: 1px solid #0088FF; }\
-  			.gme-button-r { border-right: 1px solid #0088FF; margin-right:0.5em;}\
+  			.gme-button { display: inline-block; box-sizing: content-box; -moz-box-sizing: content-box; padding:3px; vertical-align:middle; background: #eee; background-color: rgba(255,255,255,0.8); border: 1px solid #012345; border-right:0; height:19px; width:19px; text-decoration: none; }\
+  			.gme-button-l { border-left: 1px solid #012345; }\
+  			.gme-button-r { border-right: 1px solid #012345; margin-right:0.5em;}\
   			.gme-button:hover { background-color: #fff; }\
   			.gme-button-active {border:solid 3px #02b; padding:1px 0 1px 1px; background-color:#fff;}\
   			.gme-button-active:hover {border-color:#63f;filter:alpha(opacity=100);}\
   			span.gme-button, .gme-button-wide { padding-left:5px; padding-right:5px; font-size:12px; font-weight:bold; width:auto; background-image:none; color: #424242; }\
-  			.GME_home {background: url(https://gmecz.geosever.cz/home.png) no-repeat center center #eee;}\
-  			.GME_config {background: url(https://gmecz.geosever.cz/gear.png) no-repeat center center #eee;}\
-  			.GME_GS {background: url(https://gmecz.geosever.cz/gs_ikona_20.png) no-repeat center center #eee;}\
-  			.GME_hide {background: url(https://gmecz.geosever.cz/closed_eye.png) no-repeat center center #eee;}\
-  			.GME_hide.gme-button-active {background: url(https://gmecz.geosever.cz/open_eye.png) no-repeat center center #eee;}\
-        	.GME_route {background: url(https://gmecz.geosever.cz/gps-connected.png) no-repeat center center #eee;}\
-  			.GME_route.gme-button-active {background: url(https://gmecz.geosever.cz/gps-disconnected.png) no-repeat center center #eee;}\
-  			.GME_info {background: url(https://gmecz.geosever.cz/pin.png) no-repeat center center #eee;}\
-  			.GME_info.gme-button-active {background: url(https://gmecz.geosever.cz/unpin.png) no-repeat center center #eee;}\
+  			.GME_home {background: url(https://raw.githubusercontent.com/n3oklan/GMECZ/main/icons/home.png) no-repeat center center #eee;}\
+  			.GME_config {background: url(https://raw.githubusercontent.com/n3oklan/GMECZ/main/icons/gear.png) no-repeat center center #eee;}\
+  			.GME_GS {background: url(https://raw.githubusercontent.com/n3oklan/GMECZ/main/icons/gs_ikona_20.png) no-repeat center center #eee;}\
+  			.GME_hide {background: url(https://raw.githubusercontent.com/n3oklan/GMECZ/main/icons/closed_eye.png) no-repeat center center #eee;}\
+  			.GME_hide.gme-button-active {background: url(https://raw.githubusercontent.com/n3oklan/GMECZ/main/icons/open_eye.png) no-repeat center center #eee;}\
+        	.GME_route {background: url(https://raw.githubusercontent.com/n3oklan/GMECZ/main/icons/gps-connected.png) no-repeat center center #eee;}\
+  			.GME_route.gme-button-active {background: url(https://raw.githubusercontent.com/n3oklan/GMECZ/main/icons/gps-disconnected.png) no-repeat center center #eee;}\
+  			.GME_info {background: url(https://raw.githubusercontent.com/n3oklan/GMECZ/main/icons/pin.png) no-repeat center center #eee;}\
+  			.GME_info.gme-button-active {background: url(https://raw.githubusercontent.com/n3oklan/GMECZ/main/icons/unpin.png) no-repeat center center #eee;}\
   			.gme-button-refresh-labels { background-position: -320px 4px;}\
   			.gme-button-clear-labels { background-position: -69px 4px;}\
-  			.gme-scale-container {border: 1px solid #0088FF;}\
+  			.gme-scale-container {border: 1px solid #012345;}\
   			span.gme-distance-container { display: none; }\
   			span.gme-distance-container.show { display: inline-block; }\
   			#GME_loc, a.gme-button.leaflet-active {outline: none;}\
